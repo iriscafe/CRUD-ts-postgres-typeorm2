@@ -1,11 +1,11 @@
 <h1 align="center">CRUD em Typescritpt</h1>
 
 ## Descrição
-Simples CRUD de produtos fazendo suas funções básicas.
+CRUD de produtos fazendo suas funções básicas.
 
 ## Requisitos
 1. Ter o node e o postgresql instalado
-2. Ter banco de dados com conexão local com nome "loja"
+2. Ter database com nome "loja" (informações de login no arquivo: /src/db.ts)
 
 ## Ferramentas 
 <li>nodejs </li>
