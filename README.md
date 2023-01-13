@@ -4,7 +4,8 @@
 Simples CRUD de produtos fazendo suas funções básicas.
 
 ## Requisitos
-Ter o node e o postgresql instalado
+1. Ter o node e o postgresql instalado
+2. Ter banco de dados com conexão local com nome "loja"
 
 ## Ferramentas 
 <li>nodejs </li>
