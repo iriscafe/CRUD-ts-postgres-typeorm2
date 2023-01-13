@@ -17,15 +17,10 @@ const app_1 = __importDefault(require("./app"));
 const db_1 = require("./db");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            yield db_1.AppDataSource.initialize();
-            console.log('Database conectado');
-            app_1.default.listen(3000);
-            console.log('Servidor está conectado na porta', 3000);
-        }
-        catch (error) {
-            console.error(error);
-        }
+        yield db_1.AppDataSource.initialize();
+        console.log('Database conectado');
+        app_1.default.listen(3000);
+        console.log('Servidor está conectado na porta', 3000);
     });
 }
 main();
