@@ -9,9 +9,9 @@ exports.AppDataSource = new typeorm_1.DataSource({
     password: 'postgres',
     port: 5432,
     database: 'loja',
-    entities: ["src/entities/**/*.ts", "src/controllers/**/*.ts", "dist/**/*.entity.js"],
+    entities: ["../**/*.entity.{ts,js}"],
     logging: true,
     synchronize: true,
-    migrations: ['src/migrations/**/*{.ts,.js}'],
+    migrations: ['../**/*.migrations.{ts,js}'],
     subscribers: ['src/subscriber/**/*{.ts,.js}'],
 });
