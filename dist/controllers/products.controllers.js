@@ -8,12 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteProduct = exports.updateProduct = exports.createProduct = exports.getProductById = exports.getProduct = void 0;
-const products_1 = require("../entities/products");
+const db_1 = require("../db");
+const products_1 = __importDefault(require("../entities/products"));
+const productRepository = db_1.AppDataSource.getRepository(products_1.default);
 const getProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const produto = yield products_1.Produto.find();
+        const produto = yield productRepository.find();
         return res.json(produto);
     }
     catch (error) {
@@ -26,7 +31,7 @@ exports.getProduct = getProduct;
 const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
-        const produto = yield products_1.Produto.findOneBy({ id: parseInt(id) });
+        const produto = yield productRepository.findOneBy({ id: parseInt(id) });
         if (!produto)
             return res.status(404).json({ message: "Produto não encontrado" });
         return res.json(produto);
@@ -40,21 +45,18 @@ const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function*
 exports.getProductById = getProductById;
 const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, category, quantity } = req.body;
-    const produto = new products_1.Produto();
-    produto.name = name;
-    produto.category = category;
-    produto.quantity = quantity;
-    yield produto.save();
-    return res.json(produto);
+    const user = productRepository.create({ name, category, quantity });
+    const result = yield productRepository.save(user);
+    return res.json(result);
 });
 exports.createProduct = createProduct;
 const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
-        const produto = yield products_1.Produto.findOneBy({ id: parseInt(id) });
+        const produto = yield productRepository.findOneBy({ id: parseInt(id) });
         if (!produto)
             return res.status(404).json({ message: "Produto não encontrado" });
-        yield products_1.Produto.update({ id: parseInt(id) }, req.body);
+        yield productRepository.update({ id: parseInt(id) }, req.body);
         return res.sendStatus(204);
     }
     catch (error) {
@@ -67,7 +69,7 @@ exports.updateProduct = updateProduct;
 const deleteProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
-        const result = yield products_1.Produto.delete({ id: parseInt(id) });
+        const result = yield productRepository.delete({ id: parseInt(id) });
         if (result.affected === 0)
             return res.status(404).json({ message: "Produto não encontrado" });
         return res.sendStatus(204);
