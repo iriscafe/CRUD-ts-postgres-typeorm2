@@ -13,13 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteProduct = exports.updateProduct = exports.createProduct = exports.getProductById = exports.getProduct = void 0;
-const db_1 = require("../db");
 const products_1 = __importDefault(require("../entities/products"));
-const productRepository = db_1.AppDataSource.getRepository(products_1.default);
 const getProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const produto = yield productRepository.find();
-        return res.json(produto);
+        const products = yield products_1.default.find();
+        return res.json(products);
     }
     catch (error) {
         if (error instanceof Error) {
@@ -31,10 +29,10 @@ exports.getProduct = getProduct;
 const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
-        const produto = yield productRepository.findOneBy({ id: parseInt(id) });
-        if (!produto)
+        const products = yield products_1.default.findOneBy({ id: parseInt(id) });
+        if (!products)
             return res.status(404).json({ message: "Produto não encontrado" });
-        return res.json(produto);
+        return res.json(products);
     }
     catch (error) {
         if (error instanceof Error) {
@@ -45,18 +43,21 @@ const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function*
 exports.getProductById = getProductById;
 const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, category, quantity } = req.body;
-    const user = productRepository.create({ name, category, quantity });
-    const result = yield productRepository.save(user);
-    return res.json(result);
+    const products = new products_1.default();
+    products.name = name;
+    products.category = category;
+    products.quantity = quantity;
+    yield products.save();
+    return res.json(products);
 });
 exports.createProduct = createProduct;
 const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
-        const produto = yield productRepository.findOneBy({ id: parseInt(id) });
-        if (!produto)
+        const products = yield products_1.default.findOneBy({ id: parseInt(id) });
+        if (!products)
             return res.status(404).json({ message: "Produto não encontrado" });
-        yield productRepository.update({ id: parseInt(id) }, req.body);
+        yield products_1.default.update({ id: parseInt(id) }, req.body);
         return res.sendStatus(204);
     }
     catch (error) {
@@ -69,7 +70,7 @@ exports.updateProduct = updateProduct;
 const deleteProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
-        const result = yield productRepository.delete({ id: parseInt(id) });
+        const result = yield products_1.default.delete({ id: parseInt(id) });
         if (result.affected === 0)
             return res.status(404).json({ message: "Produto não encontrado" });
         return res.sendStatus(204);

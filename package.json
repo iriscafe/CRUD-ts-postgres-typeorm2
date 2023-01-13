@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
-    "typeorm": "typeorm-ts-node-commonjs -d ./src/db.ts"
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",

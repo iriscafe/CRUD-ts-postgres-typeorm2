@@ -10,41 +10,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
-let Produto = class Produto extends typeorm_1.BaseEntity {
+let Product = class Product extends typeorm_1.BaseEntity {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Produto.prototype, "id", void 0);
+], Product.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Produto.prototype, "name", void 0);
+], Product.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Produto.prototype, "category", void 0);
+], Product.prototype, "category", void 0);
 __decorate([
     (0, typeorm_1.Column)({ default: true }),
     __metadata("design:type", Boolean)
-], Produto.prototype, "status", void 0);
+], Product.prototype, "status", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
-], Produto.prototype, "quantity", void 0);
+], Product.prototype, "quantity", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
-], Produto.prototype, "created_at", void 0);
+], Product.prototype, "created_at", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
-], Produto.prototype, "updated_at", void 0);
+], Product.prototype, "updated_at", void 0);
 __decorate([
     (0, typeorm_1.DeleteDateColumn)(),
     __metadata("design:type", Date)
-], Produto.prototype, "deleted_at", void 0);
-Produto = __decorate([
-    (0, typeorm_1.Entity)('produto')
-], Produto);
-exports.default = Produto;
+], Product.prototype, "deleted_at", void 0);
+Product = __decorate([
+    (0, typeorm_1.Entity)('product')
+], Product);
+exports.default = Product;
