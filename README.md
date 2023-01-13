@@ -18,5 +18,8 @@ Ter o node e o postgresql instalado
 
 2. Inicialize a aplicação:
 > npm run build
+
+> npm run typeorm migrate:run
+
 > npm start
 
